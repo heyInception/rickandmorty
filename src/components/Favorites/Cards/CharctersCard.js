@@ -32,7 +32,6 @@ const CharctersCard = ({characters,favoritesResult,setFavorite,favorite}) => {
         }
     }
 
-    console.log('123123123')
 
     return (
         <div className="character-card">
