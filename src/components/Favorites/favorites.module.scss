@@ -1,0 +1,122 @@
+.imgcards {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 100px;
+  margin: 38px 0;
+  img {
+    filter: brightness(0.7);
+    border: 2px solid #00A3FF;
+    border-radius: 5px;
+  }
+
+}
+
+.imgcontainer {
+  display: flex;
+  align-items: center;
+  transition: width .5s;
+  height: 97px;
+
+  span {
+    position: absolute;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 32px;
+    color: #FFFFFF;
+  }
+  .imgcard_active {
+    width: 430px;
+    height: 97px;
+    -webkit-animation: animateScale .3s ease-in;
+    -webkit-animation-fill-mode: forwards;
+    &:hover {
+      transform: scale(1);
+    }
+    > span {
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 59px;
+    }
+
+  }
+
+}
+
+
+.imgcard_loc {
+  background: url(../../assets/img/cardLocations.jpg);
+}
+.imgcard_char {
+  background-image: url(../../assets/img/cardCharacters.jpg);
+}
+.imgcard_epi {
+  background-image: url(../../assets/img/cardEpisodes.jpg);
+
+}
+.imgcard {
+  position: relative;
+  background-size: cover;
+  width: 270px;
+  height: 54px;
+  border: 2px solid #00A3FF;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -ms-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  cursor: pointer;
+  -webkit-animation: animateNormal .5s ease-in;
+  -webkit-animation-fill-mode: forwards;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:rgba(0, 0, 0, .3);
+  }
+}
+
+@keyframes animateScale {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+    width: 430px;
+  }
+}
+@keyframes animateNormal {
+  0% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    width: 270px;
+    opacity: 1;
+  }
+}
+
+.favorite__row {
+  margin: 90px 0;
+  p {
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 59px;
+    color: #000000;
+    width: 100%;
+    text-align: center;
+  }
+}

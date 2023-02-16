@@ -57,7 +57,8 @@ header.header {
     flex-flow: row wrap;
     gap: 40px;
     .account__reg {
-
+      display: flex;
+      align-items: center;
     }
     .account__in {
       

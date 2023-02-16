@@ -1,0 +1,166 @@
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  -webkit-transition: linear .4s;
+  -moz-transition: linear .4s;
+  -ms-transition: linear .4s;
+  -o-transition: linear .4s;
+  transition: linear .4s;
+  &.modal-active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 500;
+  }
+  &__content {
+    position: relative;
+    padding: 20px;
+    background: #FFFFFF;
+    border: 1px dashed rgba(162, 162, 162, 0.6);
+    box-shadow: 0px 0px 20px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    max-width: 370px;
+    width: 100%;
+    min-height: 300px;
+    .ricktop {
+      position: absolute;
+      top: -160px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+    }
+    .mortyright {
+      position: absolute;
+      top: -40px;
+      right: -150px;
+      z-index: -1;
+    }
+    .rickleft {
+      position: absolute;
+      top: 47px;
+      left: -220px;
+      z-index: -1;
+    }
+  }
+  .authLogined {
+    font-size: 18px;
+    color: darkgreen;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  form {
+    display: flex;
+    flex-flow: column;
+    gap: 35px;
+    h3 {
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 44px;
+      color: #000000;
+      text-align: center;
+    }
+    .label-input {
+      position: relative;
+    }
+
+    .label-input > .icon-svg {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      &::before {
+        content: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_53_14)'%3E%3Cpath d='M19.604 2.56201L16.258 5.69901C14.988 5.27101 13.572 5.00001 12.015 5.00001C4.446 5.00001 0 11.551 0 11.551C0 11.551 1.928 14.502 5.146 16.689L2.235 19.598L3.649 21.012L21.019 3.97701L19.604 2.56201ZM13.588 8.34101C10.3 6.88801 6.907 10.249 8.323 13.547L6.597 15.254C4.783 14.094 3.372 12.604 2.537 11.594C4.03 9.94601 7.354 7.00001 12.015 7.00001C12.942 7.00001 13.811 7.11901 14.625 7.31501L13.588 8.34101ZM10.705 15.772L15.795 10.779C16.812 13.89 13.792 16.846 10.705 15.772ZM24 11.551C24 11.551 19.748 19 12.015 19C10.636 19 9.353 18.709 8.164 18.263L9.778 16.68C10.493 16.873 11.236 17 12.015 17C16.806 17 20.119 13.473 21.519 11.636C20.79 10.814 19.563 9.64601 17.932 8.68401L19.421 7.22401C22.403 9.12401 24 11.551 24 11.551Z' fill='%23A2A2A2' fill-opacity='0.6'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_53_14'%3E%3Crect width='24' height='24' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+      }
+      &.icon-svg_open {
+        &::before {
+          content: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.015 7C16.766 7 20.078 10.012 21.519 11.636C20.118 13.473 16.806 17 12.015 17C7.595 17 4.085 13.464 2.537 11.593C4.03 9.946 7.354 7 12.015 7V7ZM12.015 5C4.446 5 0 11.551 0 11.551C0 11.551 4.835 19 12.015 19C19.748 19 24 11.551 24 11.551C24 11.551 19.709 5 12.015 5ZM12 8C9.791 8 8 9.792 8 12C8 14.209 9.791 16 12 16C14.209 16 16 14.209 16 12C16 9.792 14.209 8 12 8Z' fill='%23A2A2A2' fill-opacity='0.6'/%3E%3C/svg%3E%0A");
+        }
+      }
+      }
+    input {
+      background: rgba(162, 162, 162, 0.1);
+      border: 1px solid rgba(162, 162, 162, 0.6);
+      border-radius: 5px;
+      font-weight: 500;
+      font-size: 12px;
+      line-height: 15px;
+      color: #000;
+      height: 36px;
+      padding: 0 11px;
+      outline: none;
+      width: 100%;
+      &[name=password] {
+        width: 100%;
+      }
+      &.invalid {
+        border: 1px solid red;
+        border-radius: 5px 5px 0px 0px;
+      }
+      &.correctly.invalid {
+        border: 1px solid rgba(162, 162, 162, 0.6);
+        border-radius: 5px;
+      }
+
+      &:focus {
+        border: 1px solid #00A3FF;
+      }
+    }
+    .input__box {
+      width: 100%;
+      position: relative;
+    }
+    .invalid + .error_input {
+      display: flex;
+    }
+    .error_input {
+      display: none;
+      background: #df0000;
+      border: 1px solid #df0000;
+      border-radius: 0 0 5px 5px;
+      color: #fff;
+      content: "";
+      position: absolute;
+      right: 0;
+      width: 100%;
+      padding: 2px 13px;
+      gap: 5px;
+      img {
+        height: 16px;
+      }
+      span {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+      }
+    }
+    input[type=submit] {
+      background: #000000;
+      border-radius: 5px;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      color: #FFFFFF;
+      max-width: 236px;
+      width: 100%;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+    label {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
