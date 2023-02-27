@@ -12,7 +12,9 @@ const FavoritesList = () => {
     const [favoriteLocations, setFavoriteLocations] = useState([]);
     const [favoriteEpisodes, setFavoriteEpisodes] = useState([]);
     const [isCards, setIsCards] = useState(1)
-    const [isSort, setIsSort] = useState(false)
+    const [isSortCharacters, setIsSortCharacters] = useState(0)
+    const [isSortEpisodes, setIsSortEpisodes] = useState(0)
+    const [isSortLocations, setIsSortLocations] = useState(0)
     const [isLoading, setIsLoading] = useState(true);
 
 
@@ -32,29 +34,34 @@ const FavoritesList = () => {
                 if(page === 'character') {
                     console.log(result.data)
                     setFavoriteCharacters(result.data)
+
                 } else if (page === 'location') {
                     setFavoriteLocations(result.data)
+
                 } else if (page === 'episode') {
                     setFavoriteEpisodes(result.data)
                 }
                 setIsLoading(false)
+                setIsSortCharacters(0)
+                setIsSortLocations(0)
+                setIsSortEpisodes(0)
                 console.log(baseUrl)
-            setIsSort(false)
         };
 
     useEffect(() => {
-        console.log(isSort)
-        if (isSort === false && isCards === 1 && resultFavoritesCharacters.length > 0) {
+        console.log(isSortEpisodes)
+        if (isSortCharacters === 0 && isCards === 1 && resultFavoritesCharacters.length > 0) {
             fetchApi(pageCharacters,resultFavoritesCharacters)
-        } else if (isCards === 0 && resultFavoritesLocations.length > 0) {
+        } else if (isSortLocations === 0 && isCards === 0 && resultFavoritesLocations.length > 0) {
             fetchApi(pageLocations, resultFavoritesLocations)
-        } else if (isCards === 2 && resultFavoritesEpisodes.length > 0) {
+        } else if (isSortEpisodes === 0 && isCards === 2 && resultFavoritesEpisodes.length > 0) {
             fetchApi(pageEpisodes,resultFavoritesEpisodes)
         }
         if (resultFavoritesCharacters.length === 0) {
             setIsLoading(false)
         }
-        if(isSort === true) {
+        // Сортировка по персонажам
+        if(isSortCharacters === 1) {
             const sortingName = favoriteCharacters.sort(function (a, b) {
                 if (a.name < b.name) {
                     return -1;
@@ -63,11 +70,82 @@ const FavoritesList = () => {
                     return 1;
                 }
             })
-            console.log('sortingName', sortingName)
+
             setFavoriteCharacters([...sortingName])
         }
+        if(isSortCharacters === 2) {
+            const sortingOrigin = favoriteCharacters.sort(function (a, b) {
+                if (a.origin.name < b.origin.name) {
+                    return -1;
+                }
+                if (a.origin.name > b.origin.name) {
+                    return 1;
+                }
+            })
+            setFavoriteCharacters([...sortingOrigin])
+        }
+        if(isSortCharacters === 3) {
+            const sortingId = favoriteCharacters.sort(function (a, b) {
+                if (a.location.name < b.location.name) {
+                    return -1;
+                }
+                if (a.location.name > b.location.name) {
+                    return 1;
+                }
+            })
+            setFavoriteCharacters([...sortingId])
+        }
+        // Сортировка по локациям
+        if(isSortLocations === 1) {
+            const sortingName = favoriteLocations.sort(function (a, b) {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+            })
 
-    }, [isCards, isSort])
+            setFavoriteLocations([...sortingName])
+        }
+        if(isSortLocations === 2) {
+            const sortingType = favoriteLocations.sort(function (a, b) {
+                if (a.type < b.type) {
+                    return -1;
+                }
+                if (a.type > b.type) {
+                    return 1;
+                }
+            })
+
+            setFavoriteLocations([...sortingType])
+        }
+        // Сортировка по эпизодам
+        if(isSortEpisodes === 1) {
+            const sortingName = favoriteEpisodes.sort(function (a, b) {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+            })
+
+            setFavoriteLocations([...sortingName])
+        }
+        if(isSortEpisodes === 2) {
+            const sortingEpisode = favoriteEpisodes.sort(function (a, b) {
+                if (a.episode < b.episode) {
+                    return -1;
+                }
+                if (a.episode > b.episode) {
+                    return 1;
+                }
+            })
+
+            setFavoriteLocations([...sortingEpisode])
+        }
+    }, [isCards, isSortCharacters, isSortLocations, isSortEpisodes])
 
     return (
 <section>
@@ -93,12 +171,20 @@ const FavoritesList = () => {
             <Spinner/>
         ) : (
         <>
-
             {isCards === 1  && (
                 <>
-                    <button className="sort-button" id="byName" name="sort" value="byName" onClick={() => setIsSort(true)} >
-                        по имени
-                    </button>
+                    <div className={classes.sorting}>
+                        <span>Сортировать:</span>
+                        <button className={isSortCharacters === 1 ? [classes.sortButton,classes.sortButton_active].join(' ') : [classes.sortButton].join(' ')} id="byName" name="sort" value="byName" onClick={() => setIsSortCharacters(1)} >
+                            по имени
+                        </button>
+                        <button className={isSortCharacters === 2 ? [classes.sortButton,classes.sortButton_active].join(' ') : [classes.sortButton].join(' ')} id="byName" name="sort" value="byOrigin" onClick={() => setIsSortCharacters(2)} >
+                            по месту происхождения
+                        </button>
+                        <button className={isSortCharacters === 3 ? [classes.sortButton,classes.sortButton_active].join(' ') : [classes.sortButton].join(' ')} id="byName" name="sort" value="byLoc" onClick={() => setIsSortCharacters(3)} >
+                            по последней локации
+                        </button>
+                    </div>
                 <div className="char-cards">
                     {resultFavoritesCharacters.length >= 1  &&  (
                         Array.from(favoriteCharacters).map(characters => (
@@ -128,6 +214,16 @@ const FavoritesList = () => {
             )}
 
         {isCards === 0  && (
+            <>
+                <div className={classes.sorting}>
+                    <span>Сортировать:</span>
+                    <button className={isSortLocations === 1 ? [classes.sortButton,classes.sortButton_active].join(' ') : [classes.sortButton].join(' ')} id="byName" name="sort" value="byName" onClick={() => setIsSortLocations(1)} >
+                        по имени
+                    </button>
+                    <button className={isSortLocations === 2 ? [classes.sortButton,classes.sortButton_active].join(' ') : [classes.sortButton].join(' ')} id="byName" name="sort" value="byOrigin" onClick={() => setIsSortLocations(2)} >
+                        по типу
+                    </button>
+                </div>
             <div className="char-cards">
                 {resultFavoritesLocations.length > 1 && Array.isArray(favoriteLocations) && (
                     favoriteLocations.map(locations => (
@@ -152,8 +248,19 @@ const FavoritesList = () => {
                     <p> У вас пока нет избранных локаций</p>
                 )}
             </div>
+            </>
         )}
         {isCards === 2 && (
+            <>
+                <div className={classes.sorting}>
+                    <span>Сортировать:</span>
+                    <button className={isSortEpisodes === 1 ? [classes.sortButton,classes.sortButton_active].join(' ') : [classes.sortButton].join(' ')} id="byName" name="sort" value="byName" onClick={() => setIsSortEpisodes(1)} >
+                        по имени
+                    </button>
+                    <button className={isSortEpisodes === 2 ? [classes.sortButton,classes.sortButton_active].join(' ') : [classes.sortButton].join(' ')} id="byName" name="sort" value="byOrigin" onClick={() => setIsSortEpisodes(2)} >
+                        по эпизодам
+                    </button>
+                </div>
             <div  className="char-cards char-cards__row">
                 {resultFavoritesEpisodes.length > 1 && Array.isArray(favoriteEpisodes) &&  (
                     favoriteEpisodes.map(episodes => (
@@ -178,7 +285,7 @@ const FavoritesList = () => {
                     <p> У вас пока нет избранных эпизодов</p>
                 )}
             </div>
-
+            </>
         )}
         </>
             )}
