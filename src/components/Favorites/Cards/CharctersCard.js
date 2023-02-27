@@ -57,7 +57,7 @@ const CharctersCard = ({characters,favoritesResult,setFavorite,favorite}) => {
                     </ul>
                     <ul>
                         <li>Последняя локация:</li>
-                        <li>{characters.id}</li>
+                        <li>{characters.location.name}</li>
                     </ul>
                 </div>
             </div>
