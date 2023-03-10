@@ -60,7 +60,7 @@ const FilterInput = ({
                             placeholder="Введите имя персонажа"
                             className={classes.inputFilter}
                             aria-label="name search input"
-                            value={filterName}
+                            value={filterName == null ? '' : filterName}
                             onChange={handleNameFilter}
                         />
                     </label>
@@ -72,7 +72,7 @@ const FilterInput = ({
                             placeholder="Введите расу персонажа"
                             className={classes.inputFilter}
                             aria-label="name search input"
-                            value={filterSpecies}
+                            value={filterSpecies == null ? '' : filterSpecies}
                             onChange={handleSpeciesFilter}
                         />
                     </label>
@@ -121,7 +121,7 @@ const FilterInput = ({
                                 placeholder="Введите название локации"
                                 className={classes.inputFilter}
                                 aria-label="name search input"
-                                value={filterName}
+                                value={filterName == null ? '' : filterName}
                                 onChange={handleNameFilter}
                             />
                         </label>
@@ -133,7 +133,7 @@ const FilterInput = ({
                                 placeholder="Введите тип локации"
                                 className={classes.inputFilter}
                                 aria-label="name search input"
-                                value={filterSpecies}
+                                value={filterSpecies == null ? '' : filterSpecies}
                                 onChange={handleSpeciesFilter}
                             />
                         </label>
@@ -145,7 +145,7 @@ const FilterInput = ({
                                 placeholder="Введите измерение"
                                 className={classes.inputFilter}
                                 aria-label="name search input"
-                                value={filterStatus}
+                                value={filterStatus == null ? '' : filterStatus}
                                 onChange={handleStatusFilter}
                             />
                         </label>
@@ -163,7 +163,7 @@ const FilterInput = ({
                                 placeholder="Введите название серии"
                                 className={classes.inputFilter}
                                 aria-label="name search input"
-                                value={filterName}
+                                value={filterName == null ? '' : filterName}
                                 onChange={handleNameFilter}
                             />
                         </label>
@@ -175,7 +175,7 @@ const FilterInput = ({
                                 placeholder="Введите заданный код эпизода"
                                 className={classes.inputFilter}
                                 aria-label="name search input"
-                                value={filterSpecies}
+                                value={filterSpecies == null ? '' : filterSpecies}
                                 onChange={handleSpeciesFilter}
                             />
                         </label>
