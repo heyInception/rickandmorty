@@ -1,0 +1,77 @@
+.add_favorite {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  opacity: 0;
+  -webkit-transition: opacity .2s;
+  -moz-transition: opacity .2s;
+  -ms-transition: opacity .2s;
+  -o-transition: opacity .2s;
+  transition: opacity .2s;
+  button {
+    background: #00A3FF;
+    border: 1px solid rgba(162, 162, 162, 0.6);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0;
+    &::before {
+      position: absolute;
+      content: '';
+      width: 4px;
+      height: 20px;
+      background-color: #fff;
+      -webkit-transition: linear .4s;
+      -moz-transition: linear .4s;
+      -ms-transition: linear .4s;
+      -o-transition: linear .4s;
+      transition: linear .4s;
+    }
+    &::after {
+      position: absolute;
+      content: '';
+      width: 20px;
+      height: 4px;
+      background-color: #fff;
+      -webkit-transition: linear .4s;
+      -moz-transition: linear .4s;
+      -ms-transition: linear .4s;
+      -o-transition: linear .4s;
+      transition: linear .4s;
+    }
+  }
+}
+button.add_favorite_button_added {
+  background: #00CA51;
+  &::before {
+    opacity: 1;
+    height: 10px;
+    top: 16px;
+    left: 13px;
+    transform: rotate(-40deg);
+  }
+  &::after {
+    top: 16px;
+    right: 5px;
+    background-color: #fff;
+    transform: rotate(132deg);
+  }
+}
+
+.remove_favorite_button  {
+  background: #DF0000;
+  &::before {
+    opacity: 1;
+    transform: rotate(-45deg);
+  }
+  &::after {
+    background-color: #fff;
+    transform: rotate(135deg);
+
+  }
+}
