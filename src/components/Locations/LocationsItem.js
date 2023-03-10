@@ -1,5 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../../Context/Context";
+import classes from './locations.module.scss';
+
 
 const LocationsItem = ({ location }) => {
     const [addFavorite, setAddFavorite] = useState(false)
@@ -26,7 +28,7 @@ const LocationsItem = ({ location }) => {
             let usersAuth = JSON.parse(localStorage.getItem('authUsers')) || []
 
             for(let i = 0; users.length > i; i++) {
-                $el.classList.add('character-card__add-favorites_added')
+                $el.classList.add(`${classes.add_favorite_button_added}`)
                 $el.innerHTML = 'В избранном'
                 for(let i = 0; users.length > i; i++) {
                     if (users[i].email === usersAuth[0].login) {
@@ -43,26 +45,36 @@ const LocationsItem = ({ location }) => {
     }
 
     return (
-        <div className="character-card">
+        <div className={classes.locations_card}>
 
-            <div className="character-card__content">
-                <div className="character-card__title">
+            <div className={classes.locations_content}>
+                <div className={classes.locations_title}>
                     <h3>{location.name}</h3>
-                    <span className="status">
-                        <span className="status-icon">{location.type}</span>
-                        <span className="status-icon">{location.dimension}</span>
-
-
-                        </span>
-                    <span className="status-icon">{location.residents.length}</span>
-
+                </div>
+                <div className={classes.locations_row}>
+                <div className={classes.locations_column}>
+                    <div className={classes.locations_wrap}>
+                        <div className={classes.locations_type}>Тип:</div>
+                        <div className={classes.locations_name}>{location.type}</div>
+                    </div>
+                    <div className={classes.locations_wrap}>
+                        <div className={classes.locations_type}>Измерение:</div>
+                        <div className={classes.locations_name}>{location.dimension}</div>
+                    </div>
+                </div>
+                <div className={classes.locations_column}>
+                    <div className={classes.locations_wrap}>
+                        <div className={classes.locations_type}>Количество персонажей, которые в последний раз были замечены здесь:</div>
+                        <div className={[classes.locations_name,classes.locations_name_small].join(' ')}>{location.residents.length}</div>
+                    </div>
+                </div>
                 </div>
             </div>
             {isAuth
                 ?
-                <div className="character-card__add-favorites">
+                <div className={classes.add_favorite}>
                     {addFavorite
-                        ? <button onClick={buttonHandler} data-id={location.id} className="character-card__add-favorites_added">В избранном</button>
+                        ? <button onClick={buttonHandler} data-id={location.id} className={classes.add_favorite_button}>В избранном</button>
                         : <button onClick={buttonHandler} data-id={location.id}>Добавить в избранное</button>
                     }
 
