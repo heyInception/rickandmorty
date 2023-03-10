@@ -9,6 +9,7 @@ const Login = ({active, setActive}) => {
             login: "",
             email: "",
             username: "",
+            lastname: "",
             password: "",
         }
     })
@@ -58,6 +59,7 @@ const Login = ({active, setActive}) => {
                     login: login.login || login.email,
                     password: login.password,
                     username: jParse[indexUsers].username,
+                    lastname: jParse[indexUsers].lastname
                 };
                 authUsers.push(currentUser)
                 localStorage.authUsers = JSON.stringify(authUsers);
@@ -69,6 +71,7 @@ const Login = ({active, setActive}) => {
                     login: login.login || login.email,
                     password: login.password,
                     username: jParse[indexUsers].username,
+                    lastname: jParse[indexUsers].lastname,
                 };
                 authUsers.push(currentUser)
                 localStorage.authUsers = JSON.stringify(authUsers);
