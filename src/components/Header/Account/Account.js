@@ -33,7 +33,7 @@ export const Account = () => {
        <div className="account">
                 <div className="account__row">
                     <div className="account__reg">
-                        <div>{listName[0].username}</div>
+                        <div>{listName[0].username} {listName[0].lastname[0]}.</div>
                     </div>
                     <div className="account__in">
                         <button className="btn-reset" onClick={logout}>Выйти</button>
