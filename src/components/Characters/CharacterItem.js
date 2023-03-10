@@ -84,7 +84,6 @@ const CharacterItem = ({ character }) => {
     };
     const episodesRange = filterEpisodes()
 
-    console.log(addFavorite)
 
     return (
         <div className="character-card">
