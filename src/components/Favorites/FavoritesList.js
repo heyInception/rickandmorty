@@ -27,7 +27,9 @@ const FavoritesList = () => {
         pageLocations = 'location',
         pageEpisodes = 'episode',
         fetchApi = async (page, resultCard) => {
+
                 setIsLoading(true)
+
                 let result;
                 let baseUrl = `https://rickandmortyapi.com/api/${page}/${resultCard}`
                 result = await axios.get(baseUrl);
@@ -42,19 +44,21 @@ const FavoritesList = () => {
                     setFavoriteEpisodes(result.data)
                 }
                 setIsLoading(false)
-                setIsSortCharacters(0)
-                setIsSortLocations(0)
-                setIsSortEpisodes(0)
+            setIsSortCharacters(0)
+            setIsSortLocations(0)
+            setIsSortEpisodes(0)
                 console.log(baseUrl)
         };
 
     useEffect(() => {
-        console.log(isSortEpisodes)
         if (isSortCharacters === 0 && isCards === 1 && resultFavoritesCharacters.length > 0) {
+            setIsSortCharacters(0)
             fetchApi(pageCharacters,resultFavoritesCharacters)
         } else if (isSortLocations === 0 && isCards === 0 && resultFavoritesLocations.length > 0) {
+            setIsSortLocations(0)
             fetchApi(pageLocations, resultFavoritesLocations)
         } else if (isSortEpisodes === 0 && isCards === 2 && resultFavoritesEpisodes.length > 0) {
+            setIsSortEpisodes(0)
             fetchApi(pageEpisodes,resultFavoritesEpisodes)
         }
         if (resultFavoritesCharacters.length === 0) {
@@ -62,6 +66,7 @@ const FavoritesList = () => {
         }
         // Сортировка по персонажам
         if(isSortCharacters === 1) {
+            // eslint-disable-next-line array-callback-return
             const sortingName = favoriteCharacters.sort(function (a, b) {
                 if (a.name < b.name) {
                     return -1;
@@ -74,6 +79,7 @@ const FavoritesList = () => {
             setFavoriteCharacters([...sortingName])
         }
         if(isSortCharacters === 2) {
+            // eslint-disable-next-line array-callback-return
             const sortingOrigin = favoriteCharacters.sort(function (a, b) {
                 if (a.origin.name < b.origin.name) {
                     return -1;
@@ -85,6 +91,7 @@ const FavoritesList = () => {
             setFavoriteCharacters([...sortingOrigin])
         }
         if(isSortCharacters === 3) {
+            // eslint-disable-next-line array-callback-return
             const sortingId = favoriteCharacters.sort(function (a, b) {
                 if (a.location.name < b.location.name) {
                     return -1;
@@ -97,6 +104,7 @@ const FavoritesList = () => {
         }
         // Сортировка по локациям
         if(isSortLocations === 1) {
+            // eslint-disable-next-line array-callback-return
             const sortingName = favoriteLocations.sort(function (a, b) {
                 if (a.name < b.name) {
                     return -1;
@@ -109,6 +117,7 @@ const FavoritesList = () => {
             setFavoriteLocations([...sortingName])
         }
         if(isSortLocations === 2) {
+            // eslint-disable-next-line array-callback-return
             const sortingType = favoriteLocations.sort(function (a, b) {
                 if (a.type < b.type) {
                     return -1;
@@ -122,6 +131,7 @@ const FavoritesList = () => {
         }
         // Сортировка по эпизодам
         if(isSortEpisodes === 1) {
+            // eslint-disable-next-line array-callback-return
             const sortingName = favoriteEpisodes.sort(function (a, b) {
                 if (a.name < b.name) {
                     return -1;
@@ -134,6 +144,7 @@ const FavoritesList = () => {
             setFavoriteLocations([...sortingName])
         }
         if(isSortEpisodes === 2) {
+            // eslint-disable-next-line array-callback-return
             const sortingEpisode = favoriteEpisodes.sort(function (a, b) {
                 if (a.episode < b.episode) {
                     return -1;
@@ -173,6 +184,7 @@ const FavoritesList = () => {
         <>
             {isCards === 1  && (
                 <>
+                    {resultFavoritesCharacters.length > 1  &&  (
                     <div className={classes.sorting}>
                         <span>Сортировать:</span>
                         <button className={isSortCharacters === 1 ? [classes.sortButton,classes.sortButton_active].join(' ') : [classes.sortButton].join(' ')} id="byName" name="sort" value="byName" onClick={() => setIsSortCharacters(1)} >
@@ -185,8 +197,9 @@ const FavoritesList = () => {
                             по последней локации
                         </button>
                     </div>
+                    )}
                 <div className="char-cards">
-                    {resultFavoritesCharacters.length >= 1  &&  (
+                    {resultFavoritesCharacters.length > 1  &&  (
                         Array.from(favoriteCharacters).map(characters => (
                             <CharctersCard
                                 key={characters.id}
@@ -215,6 +228,7 @@ const FavoritesList = () => {
 
         {isCards === 0  && (
             <>
+                {resultFavoritesLocations.length > 1 && Array.isArray(favoriteLocations) && (
                 <div className={classes.sorting}>
                     <span>Сортировать:</span>
                     <button className={isSortLocations === 1 ? [classes.sortButton,classes.sortButton_active].join(' ') : [classes.sortButton].join(' ')} id="byName" name="sort" value="byName" onClick={() => setIsSortLocations(1)} >
@@ -224,6 +238,7 @@ const FavoritesList = () => {
                         по типу
                     </button>
                 </div>
+                )}
             <div className="char-cards">
                 {resultFavoritesLocations.length > 1 && Array.isArray(favoriteLocations) && (
                     favoriteLocations.map(locations => (
@@ -252,6 +267,7 @@ const FavoritesList = () => {
         )}
         {isCards === 2 && (
             <>
+                {resultFavoritesEpisodes.length > 1 && Array.isArray(favoriteEpisodes) &&  (
                 <div className={classes.sorting}>
                     <span>Сортировать:</span>
                     <button className={isSortEpisodes === 1 ? [classes.sortButton,classes.sortButton_active].join(' ') : [classes.sortButton].join(' ')} id="byName" name="sort" value="byName" onClick={() => setIsSortEpisodes(1)} >
@@ -261,6 +277,7 @@ const FavoritesList = () => {
                         по эпизодам
                     </button>
                 </div>
+                )}
             <div  className="char-cards char-cards__row">
                 {resultFavoritesEpisodes.length > 1 && Array.isArray(favoriteEpisodes) &&  (
                     favoriteEpisodes.map(episodes => (
