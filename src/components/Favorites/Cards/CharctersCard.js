@@ -31,6 +31,28 @@ const CharctersCard = ({characters,favoritesResult,setFavorite,favorite}) => {
             localStorage.setItem('users', JSON.stringify(users))
         }
     }
+    const classAlive = {
+        background: "#00CA51",
+    };
+
+    const classDead = {
+        background: "#DF0000",
+    };
+
+    const classUnknown = {
+        background: "#FFC803",
+    };
+
+    let className = null;
+
+    if (characters.status === "Alive") {
+        className = classAlive;
+    } else if (characters.status === "Dead") {
+        className = classDead;
+    } else if (characters.status === "unknown") {
+        className = classUnknown;
+    }
+
 
 
     return (
@@ -42,7 +64,7 @@ const CharctersCard = ({characters,favoritesResult,setFavorite,favorite}) => {
                 <div className="character-card__title">
                     <h3>{characters.name}</h3>
                     <span className="status">
-                        <span className="status-icon" ></span>
+                        <span className="status-icon"  style={className}></span>
                         {characters.status}
                         </span>
                 </div>
